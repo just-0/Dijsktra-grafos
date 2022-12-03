@@ -112,16 +112,38 @@ public:
     vector<Node*> nodes;
 };
 
-class CCharGraph : public CGraph<char,int>
+class DrawGraph : public CGraph<char,int>
 {
 public:
-    int TriangleCounting()
+    void Profundidad(Node *n)
     {
-        return 0;
-    }
+       
+        
+        std::queue<Node*> q;
+        q.push(n);
+        
 
-    int QuadCounting()
-    {
-        return 0;
+        while(q.size()>0)
+        {
+            Node* t = q.front();
+             for ( auto i : t->edges)
+            {
+                if(&i->nodes[0] != &q.front())q.push(i->nodes[0]);
+                if(&i->nodes[1] != &q.front())q.push(i->nodes[1]);    
+               
+            }
+
+            cout<<t->value<<endl;
+            cout<<q.front()->value<<endl;
+            /*
+        
+            if(q.front()->nodes[0])q.push(q.front()->nodes[0]);
+            if(q.front()->nodes[1])q.push(q.front()->nodes[1]);
+            cout<<q.front()->value;
+            q.front()->DrawNode(window);
+            q.pop();
+           
+        }
+        */
     }
 };
